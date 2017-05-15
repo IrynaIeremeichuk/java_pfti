@@ -1,19 +1,14 @@
 package ru.stqa.pft.addressbook;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 import java.util.concurrent.TimeUnit;
-import java.util.Date;
-import java.io.File;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-import static org.openqa.selenium.OutputType.*;
 
 public class GroupCreationTests {
     FirefoxDriver wd;
@@ -23,11 +18,6 @@ public class GroupCreationTests {
         FirefoxOptions options = new FirefoxOptions().setLegacy(true);
         wd = new FirefoxDriver(options);
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    }
-
-
-    @Test
-    public void GroupCreationTests() {
         wd.get("http://localhost/addressbook/");
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
@@ -36,6 +26,12 @@ public class GroupCreationTests {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+    }
+
+
+    @Test
+    public void testGroupCreation() {
+
         wd.findElement(By.linkText("groups")).click();
         wd.findElement(By.name("new")).click();
         wd.findElement(By.id("content")).click();
